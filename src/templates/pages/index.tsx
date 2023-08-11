@@ -17,33 +17,35 @@ export default function Index(props: {
         ></link>
         <title>Blog bun htmx</title>
       </head>
-      <div>
-        <section class="py-5 text-center container">
-          <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-              <h1 class="fw-light">Blog example</h1>
-              <p class="lead text-muted">
-                Something short and leading about the collection below—its
-                contents, the creator, etc. Make it short and sweet, but not too
-                short so folks don’t simply skip over it entirely.
-              </p>
-              <CommentForm isError={false} />
-              <CommentList comments={props.comments} />
+      <body>
+        <div>
+          <section class="py-5 container">
+            <div class="row py-lg-5">
+              <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Blog example</h1>
+                <p class="lead text-muted">
+                  Something short and leading about the collection below—its
+                  contents, the creator, etc. Make it short and sweet, but not
+                  too short so folks don't simply skip over it entirely.
+                </p>
+                <CommentForm isError={false} />
+                <CommentList comments={props.comments} />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-          crossorigin="anonymous"
-        ></script>
-        <script
-          src="https://unpkg.com/htmx.org@1.9.4"
-          integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
-          crossorigin="anonymous"
-        ></script>
-      </div>
+          <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"
+          ></script>
+          <script
+            src="https://unpkg.com/htmx.org@1.9.4"
+            integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+            crossorigin="anonymous"
+          ></script>
+        </div>
+      </body>
     </html>
   );
 }

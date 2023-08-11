@@ -8,7 +8,10 @@
   "dependencies": {
     "@elysiajs/html": "^0.6.0",
     "elysia": "latest",
+    "isomorphic-dompurify": "^1.8.0",
+    "sanitize-html": "^2.11.0",
     "typed-html": "^3.0.1",
+    "xss": "^1.0.14",
     "zod": "^3.21.4"
   },
   "devDependencies": {
