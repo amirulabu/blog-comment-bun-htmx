@@ -2,7 +2,7 @@ import * as elements from "typed-html";
 
 const CommentForm = (props: { isError: boolean }) => {
   return (
-    <form hx-post="/">
+    <form hx-post="/" hx-swap="outerHTML">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">
           Email address
@@ -17,7 +17,7 @@ const CommentForm = (props: { isError: boolean }) => {
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">
-          Example textarea
+          Comment
         </label>
         <textarea
           class="form-control"

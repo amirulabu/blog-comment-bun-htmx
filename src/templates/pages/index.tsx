@@ -3,7 +3,7 @@ import CommentList from "../components/comment-list";
 import CommentForm from "../components/comment-form";
 
 export default function Index(props: {
-  comments: { email: string; body: string }[];
+  comments: { id: number; email: string; body: string }[];
 }) {
   return (
     <html>
