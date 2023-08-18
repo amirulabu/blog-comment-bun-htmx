@@ -11,7 +11,7 @@ const CommentItem = (props: { comment: Comment }) => {
         </p>
         <h6 class="card-subtitle mb-2 text-body-secondary">{comment.email}</h6>
         <small class="text-muted">{comment.timestamp}</small>
-        <span style="display:hidden">{comment.ipaddr}</span>
+        <span style="display:none">{comment.ipaddr}</span>
         <button
           class="btn btn-primary btn-small"
           hx-get={`/h/comments/${comment.id}`}
