@@ -16,6 +16,17 @@ export default function Index(props: {
           crossorigin="anonymous"
         ></link>
         <title>Blog bun htmx</title>
+        <style>
+          {`
+      .fade-me-in.htmx-added {
+        border: 3px solid red;
+      }
+      .fade-me-in {
+        border: 0px solid red;
+        transition: border-width 1s ease-out;
+      }
+          `}
+        </style>
       </head>
       <body>
         <section class="container-fluid">
