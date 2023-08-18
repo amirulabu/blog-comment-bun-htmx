@@ -17,7 +17,7 @@ const CommentForm = (props: { isError: boolean }) => {
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">
-          Example textarea
+          Your comment
         </label>
         <textarea
           class="form-control"
