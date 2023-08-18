@@ -1,20 +1,18 @@
 import * as elements from "typed-html";
+import CommentItem from "./comment-item";
 
 const CommentList = (props: { comments: Comment[] }) => {
   return (
-    <div>
+    <div hx-target="this">
+      <button
+        hx-get="/h/comments"
+        hx-trigger="new-comment-added from:body"
+        class="btn btn-primary"
+      >
+        Reload comments
+      </button>
       {props.comments.map((comment) => (
-        <div class="card mb-3">
-          <div class="card-body">
-            <p class="card-text">
-              {comment.id}.{comment.body}
-            </p>
-            <h6 class="card-subtitle mb-2 text-body-secondary">
-              {comment.email}
-            </h6>
-            <small class="text-muted">{comment.timestamp}</small>
-          </div>
-        </div>
+        <CommentItem comment={comment} />
       ))}
     </div>
   );

@@ -5,11 +5,22 @@ import Index from "./templates/pages";
 import CommentForm from "./templates/components/comment-form";
 import DOMPurify from "isomorphic-dompurify";
 import { z } from "zod";
+import CommentList from "./templates/components/comment-list";
+import CommentItemForm from "./templates/components/comment-item-form";
+import CommentItem from "./templates/components/comment-item";
 var xss = require("xss");
 
 const commentSchema = z.object({
   email: z.string().email(),
   body: z.string().min(2),
+});
+
+const commentBodySchema = z.object({
+  body: z.string().min(2),
+});
+
+const commentEditParamsSchema = z.object({
+  id: z.string(),
 });
 
 const comments: Comment[] = [
@@ -28,11 +39,20 @@ const addComment = (email: string, body: string) => {
   console.log(comments);
 };
 
+const editComment = (id: number, body: string) => {
+  comments[id - 1].body = body;
+  return comments[id - 1];
+};
+
+const deleteComment = (id: number) => {
+  comments.splice(id - 1, 1);
+};
+
 const sanitizeHtml = (html: string) => {
   // return html;
   // return DOMPurify.sanitize(html);
-  // return xss(html);
-  return html;
+  return xss(html);
+  // return html;
 };
 
 const app = new Elysia()
@@ -40,12 +60,43 @@ const app = new Elysia()
 
   .get("/", ({ html }) => html(<Index comments={comments} />))
 
-  .post("/", ({ body }: any) => {
+  .get("/h/comments", () => <CommentList comments={comments} />)
+
+  .get("/h/comments/:id", ({ params }) => {
+    const prm = commentEditParamsSchema.parse(params);
+    const comment = comments.find((c) => c.id === parseInt(prm.id));
+    if (!comment) {
+      return <div>Comment not found!</div>;
+    }
+    return <CommentItemForm comment={comment} />;
+  })
+
+  .put("/h/comments/:id", ({ params, body }) => {
+    const prm = commentEditParamsSchema.parse(params);
+    const bdy = commentBodySchema.parse(body);
+    const comment = editComment(parseInt(prm.id), sanitizeHtml(bdy.body));
+    return <CommentItem comment={comment} />;
+  })
+
+  .delete("/h/comments/:id", ({ params }) => {
+    const prm = commentEditParamsSchema.parse(params);
+    deleteComment(parseInt(prm.id));
+    return "";
+  })
+
+  .get("/h/comments/:id/item", ({ params }) => {
+    const prm = commentEditParamsSchema.parse(params);
+    const comment = comments.find((c) => c.id === parseInt(prm.id));
+    return <CommentItem comment={comment} />;
+  })
+
+  .post("/", ({ body, set }) => {
     const res = commentSchema.safeParse(body);
     if (!res.success) {
       return <CommentForm isError={true} />;
     }
     addComment(sanitizeHtml(res.data.email), sanitizeHtml(res.data.body));
+    set.headers["HX-Trigger"] = "new-comment-added";
     return <CommentForm isError={false} />;
   })
   .listen(3000);

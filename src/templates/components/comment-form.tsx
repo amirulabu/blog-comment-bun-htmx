@@ -2,7 +2,7 @@ import * as elements from "typed-html";
 
 const CommentForm = (props: { isError: boolean }) => {
   return (
-    <form hx-post="/" hx-swap="swap:1s" class="fade-me-in">
+    <form hx-post="/" hx-swap="outerHTML" class="fade-me-in">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">
           Email address
