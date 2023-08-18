@@ -31,7 +31,6 @@ const app = new Elysia()
   .get("/", ({ html }) => html(<Index comments={comments} />))
   .post("/", ({ body }: any) => {
     const res = commentSchema.safeParse(body);
-    console.log({ res });
     if (!res.success) {
       return <CommentForm isError={true} />;
     }
