@@ -30,7 +30,7 @@ export default function Index(props: {
       </head>
       <body>
         <section class="container-fluid">
-          <div class="row py-lg-5">
+          <div class="row py-5">
             <div class="col-lg-8 mx-auto">
               <h1 class="fw-light">Blog example</h1>
               <p class="lead text-muted">
