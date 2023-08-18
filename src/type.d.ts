@@ -3,4 +3,5 @@ interface Comment {
   email: string;
   body: string;
   timestamp: string;
+  ipaddr: string;
 }

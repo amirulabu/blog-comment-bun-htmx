@@ -29,13 +29,14 @@ const comments: Comment[] = [
     email: "test@example.com",
     body: "Hello Malaysia!",
     timestamp: "2023-08-18T12:27:56.173Z",
+    ipaddr: "",
   },
 ];
 
-const addComment = (email: string, body: string) => {
+const addComment = (email: string, body: string, ipaddr: string) => {
   const newId = comments.length + 1;
   const timestamp = new Date().toISOString();
-  comments.push({ id: newId, email, body, timestamp });
+  comments.push({ id: newId, email, body, timestamp, ipaddr });
   console.log(comments);
 };
 
@@ -90,12 +91,18 @@ const app = new Elysia()
     return <CommentItem comment={comment} />;
   })
 
-  .post("/", ({ body, set }) => {
+  .post("/", ({ body, set, headers }) => {
     const res = commentSchema.safeParse(body);
     if (!res.success) {
       return <CommentForm isError={true} />;
     }
-    addComment(sanitizeHtml(res.data.email), sanitizeHtml(res.data.body));
+    console.log(headers);
+    const ipaddr = headers["x-forwarded-for"] || "";
+    addComment(
+      sanitizeHtml(res.data.email),
+      sanitizeHtml(res.data.body),
+      ipaddr
+    );
     set.headers["HX-Trigger"] = "new-comment-added";
     return <CommentForm isError={false} />;
   })

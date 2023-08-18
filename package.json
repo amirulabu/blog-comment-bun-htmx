@@ -4,7 +4,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/app.tsx",
-"build": "bun build ./src/app.tsx --outdir ./dist --target bun"
+    "build": "bun build ./src/app.tsx --outdir ./dist --target bun"
   },
   "dependencies": {
     "@elysiajs/html": "^0.6.0",
