@@ -36,8 +36,8 @@ const comments: Comment[] = [
 const addComment = (email: string, body: string, ipaddr: string) => {
   const newId = comments.length + 1;
   const timestamp = new Date().toISOString();
+  console.log({ email, body, timestamp, ipaddr });
   comments.push({ id: newId, email, body, timestamp, ipaddr });
-  // console.log(comments);
 };
 
 const editComment = (id: number, body: string) => {
