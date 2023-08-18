@@ -28,14 +28,15 @@ const sanitizeHtml = (html: string) => {
 
 const app = new Elysia()
   .use(html())
+
   .get("/", ({ html }) => html(<Index comments={comments} />))
+
   .post("/", ({ body }: any) => {
     const res = commentSchema.safeParse(body);
     if (!res.success) {
       return <CommentForm isError={true} />;
     }
     addComment(sanitizeHtml(res.data.email), sanitizeHtml(res.data.body));
-    console.log(comments);
     return <CommentForm isError={false} />;
   })
   .listen(3000);
