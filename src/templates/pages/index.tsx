@@ -2,9 +2,7 @@ import * as elements from "typed-html";
 import CommentList from "../components/comment-list";
 import CommentForm from "../components/comment-form";
 
-export default function Index(props: {
-  comments: { email: string; body: string }[];
-}) {
+export default function Index(props: { comments: Comment[] }) {
   return (
     <html>
       <head>

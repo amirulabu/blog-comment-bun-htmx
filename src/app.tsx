@@ -12,18 +12,27 @@ const commentSchema = z.object({
   body: z.string().min(2),
 });
 
-const comments: { email: string; body: string }[] = [
-  { email: "test@example.com", body: "Hello Malaysia!" },
+const comments: Comment[] = [
+  {
+    id: 1,
+    email: "test@example.com",
+    body: "Hello Malaysia!",
+    timestamp: "2023-08-18T12:27:56.173Z",
+  },
 ];
 
 const addComment = (email: string, body: string) => {
-  comments.push({ email, body });
+  const newId = comments.length + 1;
+  const timestamp = new Date().toISOString();
+  comments.push({ id: newId, email, body, timestamp });
+  console.log(comments);
 };
 
 const sanitizeHtml = (html: string) => {
   // return html;
   // return DOMPurify.sanitize(html);
-  return xss(html);
+  // return xss(html);
+  return html;
 };
 
 const app = new Elysia()
