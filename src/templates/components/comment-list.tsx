@@ -5,13 +5,16 @@ const CommentList = (props: {
 }) => {
   return (
     <div>
-      <ul class="list-group">
-        {props.comments.map((comment) => (
-          <li class="list-group-item">
-            {comment.email} - {comment.body}
-          </li>
-        ))}
-      </ul>
+      {props.comments.map((comment) => (
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text"> {comment.body} </p>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {comment.email}
+            </h6>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
