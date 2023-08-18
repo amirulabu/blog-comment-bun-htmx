@@ -37,7 +37,7 @@ const addComment = (email: string, body: string, ipaddr: string) => {
   const newId = comments.length + 1;
   const timestamp = new Date().toISOString();
   comments.push({ id: newId, email, body, timestamp, ipaddr });
-  console.log(comments);
+  // console.log(comments);
 };
 
 const editComment = (id: number, body: string) => {
@@ -96,7 +96,6 @@ const app = new Elysia()
     if (!res.success) {
       return <CommentForm isError={true} />;
     }
-    console.log(headers);
     const ipaddr = headers["x-forwarded-for"] || "";
     addComment(
       sanitizeHtml(res.data.email),
